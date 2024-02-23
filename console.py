@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         
-        new_instance = HBNBCommand.classes[toks]()
+        new_instance = HBNBCommand.classes[class_name]()
         storage.save()
         print(new_instance.id)
         #Why second save tho?
