@@ -20,8 +20,6 @@ class FileStorage:
         """Saves storage dictionary to file"""
         with open(FileStorage.__file_path, 'w') as f:
             temp = {}
-            #debug print
-            print("object to update into file storage: {}".format(FileStorage.__objects))
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
                 temp[key] = val.to_dict()
