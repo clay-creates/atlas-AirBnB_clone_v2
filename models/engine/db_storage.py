@@ -64,7 +64,7 @@ class DBStorage:
 
     def save(self):
         """Commit session changes"""
-        print("Saving to commit")
+        # print("Saving to commit")
         self.__session.commit()
 
     def delete(self, obj=None):
