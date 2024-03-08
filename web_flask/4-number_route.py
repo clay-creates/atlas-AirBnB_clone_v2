@@ -16,7 +16,6 @@ def hbnb():
     return "HBNB"
 
 
-@app.route('/c', strict_slashes=False)
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     text = text.replace('_', ' ')
@@ -30,7 +29,6 @@ def python_text(text='is cool'):
     return ("Python {}".format(text))
 
 
-@app.route('/number', strict_slashes=False)
 @app.route('/number/<int:n>', strict_slashes=False)
 def is_num(n):
     return "{} is a number".format(n)
