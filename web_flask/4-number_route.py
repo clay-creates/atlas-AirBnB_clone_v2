@@ -33,11 +33,8 @@ def python_text(text='is cool'):
 @app.route('/number', strict_slashes=False)
 @app.route('/number/<n>', strict_slashes=False)
 def is_num(n):
-    try:
-        int(n)
-        return "{} is a number".format(n)
-    except ValueError:
-        return "{} is not a number".format(n)
+    int(n)
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
