@@ -11,7 +11,7 @@ from sqlalchemy.orm import relationship
 
 class State(BaseModel, Base):
     """Representation of state """
-    if models.storage_type == "db":
+    if models.storage_t == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state")
@@ -22,7 +22,7 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """ Return the list of City objects from storage """
-        if models.storage_type != "db":
+        if models.storage_t != "db":
             return self.storage.all(City)
         else:
             return self.cities
