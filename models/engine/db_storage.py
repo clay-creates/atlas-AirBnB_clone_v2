@@ -15,6 +15,7 @@ from models.base_model import BaseModel, Base
 
 # Base = declarative_base()
 
+
 class DBStorage:
     """This class manages storage of hbnb models in database format"""
     __engine = None
@@ -29,9 +30,10 @@ class DBStorage:
         host = os.getenv('HBNB_MYSQL_HOST', 'localhost')
         db = os.getenv('HBNB_MYSQL_DB', 'hbnb_dev_db')
         env = os.getenv('HBNB_ENV')
+        url = "mysql+mysqldb"
 
         # Set DB connection
-        connect = "mysql+mysqldb://{0}:{1}@{2}:3306/{3}".format(user, pwd, host, db)
+        connect = "{0}://{1}:{2}@{3}:3306/{4}".format(url, user, pwd, host, db)
 
         # Create engine
         self.__engine = create_engine(connect, pool_pre_ping=True)
@@ -41,10 +43,9 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
         # Create the session
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(session_factory)
+        session_fact = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(session_fact)
         self.__session = Session()
-        
 
     def all(self, cls=None):
         """Implement query and return as dictionary"""
@@ -56,7 +57,8 @@ class DBStorage:
                     result[key] = instance
             return result
         else:
-            return {f"{cls.__name__}.{instance.id}": instance for instance in self.__session.query(cls).all()}
+            return {f"{cls.__name__}.{instance.id}": 
+                    instance for instance in self.__session.query(cls).all()}
 
     def new(self, obj):
         """Add object to session"""
@@ -76,8 +78,8 @@ class DBStorage:
         """Recreate tables and create new session"""
         Base.metadata.create_all(self.__engine)
         # self.__session.close()
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(session_factory)
+        session_fact = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(session_fact)
         self.__session = Session()
 
     def close(self):
