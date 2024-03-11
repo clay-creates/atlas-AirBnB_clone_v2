@@ -1,7 +1,25 @@
 #!/usr/bin/python3
 """ Starts a Flask web app """
 from flask import Flask, render_template
+import mysql.connector
 import models
+
+
+# MySQL Setup
+database = mysql.connector.connect(
+    host = 'localhost',
+    user = 'hbnb_dev',
+    pwd = 'hbnb_dev_pwd',
+    db = 'hbnb_dev_db',
+)
+cursor = database.cursor()
+
+
+# Execute SQL File
+with open('100-hbnb.sql', 'r') as f:
+    sql_commands = f.read()
+cursor.execute(sql_commands)
+database.commit()
 
 
 app = Flask(__name__)
