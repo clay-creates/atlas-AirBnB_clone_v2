@@ -14,7 +14,7 @@ def cities_by_states():
                            cities=storage.all('City').values())
 
 
-@app.teardown_appcontext()
+@app.teardown_appcontext
 def teardown_db():
     storage.close()
 
