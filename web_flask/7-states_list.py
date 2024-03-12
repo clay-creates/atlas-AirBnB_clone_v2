@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """ Starts a Flask web app """
 from flask import Flask, render_template
-# from sqlalchemy import create_engine, text
-import os
 import models
 
 
