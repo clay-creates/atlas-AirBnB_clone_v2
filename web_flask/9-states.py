@@ -12,7 +12,6 @@ def teardown_db(exception=None):
     storage.close()
 
 
-
 @app.route('/states', strict_slashes=False)
 def states():
     state = storage.all('State').order_by('name')
